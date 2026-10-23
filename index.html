@@ -4,12 +4,64 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TRAILKIT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   </head>
-  <header>
-    <nav></nav>
+  
+  <body class="bg-background">
+    <header class="border-b border-border">
+      <!-- Navigation bar -->
+    <nav class="flex justify-between items-center p-4">
+      <!-- Label -->
+      <a href="#" aria-label="Trailkit" class="inline-block text-2xl font-bold text-text transition-transform duration-[0.3s] hover:scale-[1.1]">
+          TRAIL<span class="text-primary">KIT</span>
+        </a>
+        <!-- Navigation bar for Dekstop -->
+      <ul class="text-text flex gap-10">
+        <li class="relative inline-block group py-1">
+          <a href="./error.html" aria-label="Backpack">Backpack</a>
+          <span class="absolute bottom-0 left-0 w-full h-0.5 bg-accent opacity-0 translate-y-1 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0"></span>
+        </li>
+        <li class="relative inline-block group py-1">
+          <a href="./error.html" aria-label="Tents">Tents</a>
+          <span class="absolute bottom-0 left-0 w-full h-0.5 bg-accent opacity-0 translate-y-1 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0"></span>
+        </li>
+        <li class="relative inline-block group py-1">
+          <a href="./error.html" aria-label="Apparel">Apparel</a>
+          <span class="absolute bottom-0 left-0 w-full h-0.5 bg-accent opacity-0 translate-y-1 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0"></span>
+        </li>
+        <li class="relative inline-block group py-1">
+          <a href="./error.html" aria-label="Accessories">Accessories</a>
+          <span class="absolute bottom-0 left-0 w-full h-0.5 bg-accent opacity-0 translate-y-1 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0"></span>
+        </li>
+        <li class="relative inline-block group py-1">
+          <a href="./error.html" aria-label="Sale"><span class="text-accent">Sale</span></a>
+          <span class="absolute bottom-0 left-0 w-full h-0.5 bg-accent opacity-0 translate-y-1 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0"></span>
+        </li>
+      </ul>
+      <!-- Navigation bar with icons for Dekstop -->
+      <div class="flex gap-10">
+        <a href="./error.html" aria-label="Search" class="w-8 h-8 p-1 text-text stroke-text inline-block transition-all duration-[0.3s] hover:scale-[1.2] hover:text-accent hover:stroke-accent">
+          <svg viewBox="0 0 25 25" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10.7121 0.512695C15.8433 0.773018 19.924 5.01603 19.924 10.2119L19.9113 10.7119C19.7995 12.9165 18.9505 14.9255 17.6086 16.502L24.2736 23.1738C24.5765 23.477 24.5764 23.9692 24.2736 24.2725C23.9707 24.5757 23.4789 24.5757 23.176 24.2725L16.5119 17.6006C14.8158 19.0482 12.6166 19.9238 10.2121 19.9238L9.7121 19.9111C4.7464 19.6594 0.764803 15.6776 0.512878 10.7119L0.500183 10.2119C0.500183 4.84828 4.84846 0.5 10.2121 0.5L10.7121 0.512695ZM10.2121 2.05273C5.70575 2.05273 2.05292 5.70556 2.05292 10.2119C2.05302 14.7182 5.70581 18.3711 10.2121 18.3711C14.7183 18.371 18.3712 14.7181 18.3713 10.2119C18.3713 5.70563 14.7184 2.05284 10.2121 2.05273Z"/>
+          </svg>
+        </a>
+        <a href="./error.html" aria-label="Account" class="w-8 h-8 p-1 text-text inline-block transition-all duration-[0.3s] hover:scale-[1.2] hover:text-accent">
+          <svg viewBox="0 0 25 25" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 0C18.6274 0 24 5.37258 24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12C0 5.37258 5.37258 0 12 0ZM9.89453 17C8.49271 17.1002 7.67577 17.7317 7.16211 18.4756C6.8126 18.9818 6.59392 19.5585 6.46582 20.0869C8.04075 21.1668 9.94614 21.7998 12 21.7998C14.0515 21.7998 15.9544 21.1674 17.5283 20.0898C16.595 17.6107 14.8686 17.0353 14.291 17H9.89453ZM12 2.2002C6.58761 2.2002 2.2002 6.58761 2.2002 12C2.2002 14.4952 3.13444 16.7709 4.66992 18.501C4.84307 18.073 5.06581 17.6395 5.35156 17.2256C6.21647 15.973 7.62874 14.9472 9.7666 14.8027L9.80371 14.8008H14.3691L14.3984 14.8018C15.7517 14.8733 17.9602 15.854 19.2686 18.5713C20.8411 16.8329 21.7998 14.5288 21.7998 12C21.7998 6.58761 17.4124 2.2002 12 2.2002ZM12 5.28027C14.0543 5.28041 15.7206 6.94571 15.7207 9L15.7158 9.19141C15.6162 11.1569 13.9902 12.7206 12 12.7207L11.8086 12.7158C9.84325 12.6161 8.2804 10.9901 8.28027 9C8.28042 6.94572 9.94572 5.28042 12 5.28027ZM12 7.48047C11.1607 7.48062 10.4806 8.16074 10.4805 9C10.4806 9.83927 11.1607 10.5204 12 10.5205C12.8393 10.5204 13.5204 9.83928 13.5205 9C13.5204 8.16073 12.8393 7.4806 12 7.48047Z"/>
+          </svg>
+        </a>
+        <a href="./error.html" aria-label="Cart" class="w-8 h-8 p-1 text-text stroke-text inline-block transition-all duration-[0.3s] hover:scale-[1.2] hover:text-accent hover:stroke-accent">
+          <svg viewBox="0 0 25 25" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.5986 0.519226C11.8469 0.469165 10.7448 0.62568 9.73926 1.25165C8.68607 1.9075 7.78887 3.04812 7.50488 4.84637L7.49414 4.90985V6.54364H3.24316C1.72833 6.54364 0.5 7.77197 0.5 9.2868V19.0241L0.506836 19.3063C0.649305 22.111 2.89847 24.3603 5.70312 24.5026L5.98535 24.5095H19.0146L19.2969 24.5026C22.1015 24.3603 24.3507 22.111 24.4932 19.3063L24.5 19.0241V9.2868C24.5 7.86651 23.4204 6.69857 22.0371 6.55829L21.7568 6.54364H17.6436V4.92645L17.6377 4.8786C17.5519 4.14935 17.1974 3.10552 16.4121 2.21649C15.6053 1.30304 14.366 0.581549 12.5986 0.51825V0.519226ZM21.7568 8.18915C22.3628 8.18915 22.8545 8.68087 22.8545 9.2868V19.0241C22.8541 21.1444 21.135 22.8638 19.0146 22.864H5.98535C3.86497 22.8638 2.14588 21.1444 2.14551 19.0241V9.2868C2.14551 8.68087 2.63723 8.18915 3.24316 8.18915H7.49414V11.8923C7.4944 12.3465 7.86313 12.7145 8.31738 12.7145C8.77153 12.7144 9.14036 12.3464 9.14062 11.8923V8.18915H15.9971V11.8913C15.9971 12.3457 16.3659 12.7145 16.8203 12.7145C17.2746 12.7144 17.6436 12.3456 17.6436 11.8913V8.18915H21.7568ZM12.5068 2.16083L12.5234 2.1618L12.5391 2.16278C13.8431 2.20943 14.6623 2.72168 15.1787 3.30634C15.7016 3.89849 15.9371 4.59466 15.9971 5.03387V6.54364H9.14062V5.04462C9.35925 3.75342 9.97275 3.04556 10.6094 2.64911C11.2885 2.22642 12.0479 2.12622 12.5068 2.16083Z"/>
+          </svg>
+        </a>
+      </div>
+    </nav>
   </header>
-  <body>
-    <main></main>
+    <main>
+    </main>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
