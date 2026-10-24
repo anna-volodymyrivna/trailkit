@@ -12,7 +12,6 @@
     />
     <link rel="stylesheet" href="/src/style.css" />
   </head>
-
   <body
     x-data="{
     color: '',
@@ -66,82 +65,104 @@
       setTimeout(() => { this.notification = false; }, 3000);
     }}"
   >
-    <header class="border-b border-border">
+  <!-- Header -->
+    <header
+      x-data="{ mobileMenuOpen: false }"
+      class="border-b border-border relative bg-white"
+    >
       <!-- Navigation bar -->
-      <nav class="max-w-7xl mx-auto flex justify-between items-center py-4 px-8">
-        <!-- Label -->
-        <a
-          href="#"
-          aria-label="Trailkit"
-          class="inline-block text-2xl font-bold text-text transition-transform duration-[0.3s] hover:scale-[1.1] focus-visible:scale-[1.1] focus-visible:outline-accent focus-visible:outline-offset-4"
-        >
-          TRAIL<span class="text-primary">KIT</span>
-        </a>
-        <!-- Navigation bar for Dekstop -->
-        <ul class="text-text flex gap-10">
+      <nav
+        class="max-w-7xl mx-auto flex justify-between items-center py-4 px-4 sm:px-8"
+      >
+        <!-- Burger menu icon -->
+        <div class="flex items-center gap-3">
+          <button
+            type="button"
+            @click="mobileMenuOpen = !mobileMenuOpen"
+            class="lg:hidden p-1 text-text hover:text-accent focus-visible:outline-accent"
+            :aria-expanded="mobileMenuOpen"
+            aria-label="Toggle navigation menu"
+          >
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+            >
+              <path
+                x-show="!mobileMenuOpen"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+              <path
+                x-show="mobileMenuOpen"
+                x-cloak
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+          <!-- Label -->
+          <a
+            href="#"
+            aria-label="Trailkit"
+            class="absolute left-1/2 -translate-x-1/2 lg:static lg:translate-x-0 text-2xl font-bold text-text transition-transform duration-300 hover:scale-105 focus-visible:outline-accent"
+          >
+            TRAIL<span class="text-primary">KIT</span>
+          </a>
+        </div>
+        <!-- Navigation bar for Desktop -->
+        <ul class="text-text hidden lg:flex gap-10">
           <li class="relative inline-block group py-1">
-            <a
-              href="./error.html"
-              aria-label="Backpack"
-              class="focus-visible:outline-accent focus-visible:outline-offset-8"
+            <a href="./error.html" class="focus-visible:outline-accent"
               >Backpack</a
             >
             <span
-              class="absolute bottom-0 left-0 w-full h-0.5 bg-accent opacity-0 translate-y-1 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0"
+              class="absolute bottom-0 left-0 w-full h-0.5 bg-accent opacity-0 translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0"
             ></span>
           </li>
           <li class="relative inline-block group py-1">
-            <a
-              href="./error.html"
-              aria-label="Tents"
-              class="focus-visible:outline-accent focus-visible:outline-offset-8"
+            <a href="./error.html" class="focus-visible:outline-accent"
               >Tents</a
             >
             <span
-              class="absolute bottom-0 left-0 w-full h-0.5 bg-accent opacity-0 translate-y-1 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0"
+              class="absolute bottom-0 left-0 w-full h-0.5 bg-accent opacity-0 translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0"
             ></span>
           </li>
           <li class="relative inline-block group py-1">
-            <a
-              href="./error.html"
-              aria-label="Apparel"
-              class="focus-visible:outline-accent focus-visible:outline-offset-8"
+            <a href="./error.html" class="focus-visible:outline-accent"
               >Apparel</a
             >
             <span
-              class="absolute bottom-0 left-0 w-full h-0.5 bg-accent opacity-0 translate-y-1 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0"
+              class="absolute bottom-0 left-0 w-full h-0.5 bg-accent opacity-0 translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0"
             ></span>
           </li>
           <li class="relative inline-block group py-1">
-            <a
-              href="./error.html"
-              aria-label="Accessories"
-              class="focus-visible:outline-accent focus-visible:outline-offset-8"
+            <a href="./error.html" class="focus-visible:outline-accent"
               >Accessories</a
             >
             <span
-              class="absolute bottom-0 left-0 w-full h-0.5 bg-accent opacity-0 translate-y-1 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0"
+              class="absolute bottom-0 left-0 w-full h-0.5 bg-accent opacity-0 translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0"
             ></span>
           </li>
           <li class="relative inline-block group py-1">
-            <a
-              href="./error.html"
-              aria-label="Sale"
-              class="focus-visible:outline-accent focus-visible:outline-offset-8"
+            <a href="./error.html" class="focus-visible:outline-accent"
+              ><span class="text-accent">Sale</span></a
             >
-              <span class="text-accent">Sale</span>
-            </a>
             <span
-              class="absolute bottom-0 left-0 w-full h-0.5 bg-accent opacity-0 translate-y-1 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0"
+              class="absolute bottom-0 left-0 w-full h-0.5 bg-accent opacity-0 translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0"
             ></span>
           </li>
         </ul>
-        <!-- Navigation bar with icons for Dekstop -->
-        <div class="flex gap-10">
+        <!-- Navigation bar with icons for Desktop -->
+        <div class="flex items-center gap-4 lg:gap-10">
           <a
             href="./error.html"
             aria-label="Search"
-            class="w-8 h-8 p-1 text-text stroke-text inline-block transition-all duration-[0.3s] hover:scale-[1.2] hover:text-accent hover:stroke-accent focus-visible:outline-accent focus-visible:outline-offset-8 focus-visible:text-accent focus-visible:stroke-accent"
+            class="hidden lg:inline-block w-8 h-8 p-1 text-text stroke-text transition-all duration-[0.3s] hover:scale-[1.2] hover:text-accent hover:stroke-accent focus-visible:outline-accent focus-visible:outline-offset-8 focus-visible:text-accent focus-visible:stroke-accent"
           >
             <svg
               viewBox="0 0 25 25"
@@ -156,7 +177,7 @@
           <a
             href="./error.html"
             aria-label="Account"
-            class="w-8 h-8 p-1 text-text inline-block transition-all duration-[0.3s] hover:scale-[1.2] hover:text-accent focus-visible:outline-accent focus-visible:outline-offset-8 focus-visible:text-accent"
+            class="hidden lg:inline-block w-8 h-8 p-1 text-text transition-all duration-[0.3s] hover:scale-[1.2] hover:text-accent focus-visible:outline-accent focus-visible:outline-offset-8 focus-visible:text-accent"
           >
             <svg
               viewBox="0 0 25 25"
@@ -185,27 +206,82 @@
             <div
               x-show="total > 0"
               x-cloak
-              class="h-5 w-5 rounded-full bg-primary text-white font-medium text-sm flex items-center justify-center absolute top-0 right-0 -translate-y-1/2 translate-x-1/2"
+              class="h-5 w-5 rounded-full bg-primary text-white font-medium text-xs flex items-center justify-center absolute top-0 right-0 -translate-y-1/2 translate-x-1/2"
             >
               <span x-text="total"></span>
             </div>
           </a>
         </div>
       </nav>
+      <!-- Burger menu for Mobile -->
+      <div
+        x-show="mobileMenuOpen"
+        x-collapse
+        x-cloak
+        @click.away="mobileMenuOpen = false"
+        class="lg:hidden border-t border-border bg-white px-6 py-4 shadow-lg"
+      >
+        <!-- Navigation bar for Mobile -->
+        <ul class="flex flex-col gap-4 text-text font-medium text-base">
+          <li>
+            <a href="./error.html" class="block py-1 hover:text-accent"
+              >Backpack</a
+            >
+          </li>
+          <li>
+            <a href="./error.html" class="block py-1 hover:text-accent"
+              >Tents</a
+            >
+          </li>
+          <li>
+            <a href="./error.html" class="block py-1 hover:text-accent"
+              >Apparel</a
+            >
+          </li>
+          <li>
+            <a href="./error.html" class="block py-1 hover:text-accent"
+              >Accessories</a
+            >
+          </li>
+          <li>
+            <a href="./error.html" class="block py-1 text-accent font-semibold"
+              >Sale</a
+            >
+          </li>
+        </ul>
+        <div class="mt-6 pt-4 border-t border-border flex items-center gap-6">
+          <a
+            href="./error.html"
+            class="flex items-center gap-2 text-sm text-secondary hover:text-text"
+          >
+            <span>Search</span>
+          </a>
+          <a
+            href="./error.html"
+            class="flex items-center gap-2 text-sm text-secondary hover:text-text"
+          >
+            <span>Account</span>
+          </a>
+        </div>
+      </div>
     </header>
-    <main class="max-w-7xl mx-auto w-full py-4 px-8 flex flex-col gap-4">
+    <!-- Main -->
+    <main
+      class="max-w-7xl mx-auto w-full py-4 px-4 lg:px-8 flex flex-col gap-4"
+    >
       <p class="text-secondary">
         Home/Backpacks/
         <span class="text-text font-medium">Trail 28L Hiking Backpack</span>
       </p>
-      <div class="grid grid-cols-2 gap-8">
+      <div class="grid lg:grid-cols-2 gap-8">
         <!-- Product gallery -->
         <div class="flex flex-col gap-4 relative">
           <div class="bg-white py-0.5 px-2 rounded-xl absolute top-4 left-4">
             New
           </div>
+          <!-- Main image card -->
           <div
-            class="bg-background rounded-3xl aspect-square flex items-center justify-center overflow-hidden"
+            class="bg-background rounded-xl aspect-square flex items-center justify-center overflow-hidden"
           >
             <img
               alt="Image of backpack"
@@ -213,6 +289,7 @@
               class="w-full h-full object-contain"
             />
           </div>
+          <!-- Mini gallery -->
           <div class="grid grid-cols-4 gap-4">
             <template
               x-for="(imgSrc, index) in (imagesByColor[color] || imagesByColor['Forest green'])"
@@ -237,13 +314,16 @@
         <!-- Product information -->
         <div class="flex flex-col">
           <div class="border-b border-border pb-8 flex flex-col gap-4">
+            <!-- Product code -->
             <p class="text-secondary">SKU: TK-TR28-GRN</p>
+            <!-- Product name -->
             <h1
-              class="text-text text-3xl font-bold"
+              class="text-text text-2xl lg:text-3xl font-bold"
               aria-label="Trail 28L Hiking Backpack"
             >
               Trail 28L Hiking Backpack
             </h1>
+            <!-- Product rating -->
             <div class="flex items-center gap-3">
               <div class="text-star flex gap-1">
                 <svg
@@ -314,6 +394,7 @@
                 4.6 &middot; 128 reviews
               </p>
             </div>
+            <!-- Product price -->
             <div class="flex items-end gap-2">
               <h2 class="text-2xl font-bold" aria-label="New price: $89.00">
                 $89.00
@@ -331,6 +412,7 @@
                 &minus;25%
               </div>
             </div>
+            <!-- Product color -->
             <div class="flex flex-col gap-1">
               <p class="text-secondary">
                 Color:
@@ -370,6 +452,7 @@
                 ></button>
               </div>
             </div>
+            <!-- Product size -->
             <div class="flex flex-col gap-1">
               <p class="text-secondary">
                 Size:
@@ -414,9 +497,12 @@
                 </button>
               </div>
             </div>
-            <div class="flex items-center gap-2 w-full">
+            <div
+              class="flex flex-wrap lg:flex-nowrap items-center gap-2 w-full"
+            >
+            <!-- Product count -->
               <div
-                class="flex items-center justify-between w-28 h-12 px-3 border border-border rounded-lg"
+                class="flex order-1 items-center justify-between w-28 h-12 px-3 border border-border rounded-lg"
               >
                 <button
                   type="button"
@@ -441,14 +527,16 @@
                   &plus;
                 </button>
               </div>
+              <!-- Product button Add to card -->
               <button
                 type="button"
                 @click="addToCart()"
-                class="flex-1 h-12 bg-primary text-white font-medium rounded-lg hover:bg-green-700 hover:text-lg transition-all duration-300 ease-in-out focus-visible:outline-primary focus-visible:outline-offset-4"
+                class="w-full lg:flex-1 lg:w-auto order-3 lg:order-2 h-12 bg-primary text-white font-medium rounded-lg hover:bg-green-700 hover:text-lg transition-all duration-300 ease-in-out focus-visible:outline-primary focus-visible:outline-offset-4"
                 aria-label="Add to cart"
               >
                 Add to cart
               </button>
+              <!-- Add to card information notification -->
               <div
                 x-show="notification"
                 x-cloak
@@ -492,6 +580,7 @@
                   View cart
                 </a>
               </div>
+              <!-- Add to card alert notification -->
               <div
                 x-show="alertMsg"
                 x-cloak
@@ -522,12 +611,13 @@
                 </span>
                 <p>Please select the size and color!</p>
               </div>
+              <!-- Product button Add to wishlist -->
               <button
                 type="button"
                 x-data="{inWishlist: false}"
                 @click="inWishlist = !inWishlist"
                 :class="inWishlist ? 'text-red-500 stroke-red-500' : 'text-transparent stroke-black'"
-                class="flex items-center justify-center w-12 h-12 border border-border rounded-lg hover:bg-pink-200 hover:border-red-500 hover:stroke-red-500 transition-all duration-300 ease-in-out focus-visible:stroke-red-500 focus-visible:outline-red-500"
+                class="flex order-2 lg:order-3 items-center justify-center w-12 h-12 border border-border rounded-lg hover:bg-pink-200 hover:border-red-500 hover:stroke-red-500 transition-all duration-300 ease-in-out focus-visible:stroke-red-500 focus-visible:outline-red-500"
                 aria-label="Add to wishlist"
               >
                 <svg
@@ -545,6 +635,7 @@
                 </svg>
               </button>
             </div>
+            <!-- Product in stock infirmation -->
             <div class="flex items-center gap-2 text-primary">
               <div class="h-2 w-2 bg-green-500 rounded-full"></div>
               <p aria-label="In stock - ships in 1-2 days">
@@ -552,7 +643,9 @@
               </p>
             </div>
           </div>
+          <!-- Product accordion -->
           <div class="flex flex-col border-t border-border">
+            <!-- Description -->
             <div class="pb-2 border-b border-border">
               <button
                 type="button"
@@ -575,6 +668,7 @@
                 </p>
               </div>
             </div>
+            <!-- Specifications -->
             <div class="pb-2 border-b border-border">
               <button
                 type="button"
@@ -603,6 +697,7 @@
                 </p>
               </div>
             </div>
+            <!-- Delivery & returns -->
             <div class="pb-2 border-b border-border">
               <button
                 type="button"
