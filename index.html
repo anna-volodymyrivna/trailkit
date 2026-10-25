@@ -4,12 +4,728 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TRAILKIT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/style.css" />
   </head>
-  <header>
-    <nav></nav>
-  </header>
-  <body>
-    <main></main>
+  <body
+    x-data="{
+    color: '',
+    size: '',
+    count: 1,
+    min: 1,
+    max: 10,
+    total: 0,
+    selected: 1,
+    notification: false,
+    alertMsg: false,
+    imagesByColor: {
+      'Forest green': [
+      '/images/forest_1.png',
+      '/images/forest_2.png',
+      '/images/forest_3.png',
+      '/images/forest_4.png'],
+      'Navy': [
+      '/images/navy_1.png',
+      '/images/navy_2.png',
+      '/images/navy_3.png',
+      '/images/navy_4.png'],
+      'Sand': [
+      '/images/sand_1.png',
+      '/images/sand_2.png',
+      '/images/sand_3.png',
+      '/images/sand_4.png'],
+      'Black': [
+      '/images/black_1.png',
+      '/images/black_2.png',
+      '/images/black_3.png',
+      '/images/black_4.png']
+    },
+    activeImage: '/images/forest_1.png',
+    setColor(newColor) {
+      this.color = newColor;
+      if (this.imagesByColor[newColor]) {
+        this.activeImage = this.imagesByColor[newColor][0];
+      }
+    },
+    addToCart() {
+      if (!this.size || !this.color) {
+        this.alertMsg = true;
+        this.notification = false;
+        setTimeout(() => { this.alertMsg = false; }, 3000);
+        return;
+      }
+      this.alertMsg = false;
+      this.total += this.count;
+      this.notification = true;
+      setTimeout(() => { this.notification = false; }, 3000);
+    }}"
+  >
+  <!-- Header -->
+    <header
+      x-data="{ mobileMenuOpen: false }"
+      class="border-b border-border relative bg-white"
+    >
+      <!-- Navigation bar -->
+      <nav
+        class="max-w-7xl mx-auto flex justify-between items-center py-4 px-4 sm:px-8"
+      >
+        <!-- Burger menu icon -->
+        <div class="flex items-center gap-3">
+          <button
+            type="button"
+            @click="mobileMenuOpen = !mobileMenuOpen"
+            class="lg:hidden p-1 text-text hover:text-accent focus-visible:outline-accent"
+            :aria-expanded="mobileMenuOpen"
+            aria-label="Toggle navigation menu"
+          >
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+            >
+              <path
+                x-show="!mobileMenuOpen"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+              <path
+                x-show="mobileMenuOpen"
+                x-cloak
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+          <!-- Label -->
+          <a
+            href="#"
+            aria-label="Trailkit"
+            class="absolute left-1/2 -translate-x-1/2 lg:static lg:translate-x-0 text-2xl font-bold text-text transition-transform duration-300 hover:scale-105 focus-visible:outline-accent"
+          >
+            TRAIL<span class="text-primary">KIT</span>
+          </a>
+        </div>
+        <!-- Navigation bar for Desktop -->
+        <ul class="text-text hidden lg:flex gap-10">
+          <li class="relative inline-block group py-1">
+            <a href="./error.html" class="focus-visible:outline-accent"
+              >Backpack</a
+            >
+            <span
+              class="absolute bottom-0 left-0 w-full h-0.5 bg-accent opacity-0 translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0"
+            ></span>
+          </li>
+          <li class="relative inline-block group py-1">
+            <a href="./error.html" class="focus-visible:outline-accent"
+              >Tents</a
+            >
+            <span
+              class="absolute bottom-0 left-0 w-full h-0.5 bg-accent opacity-0 translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0"
+            ></span>
+          </li>
+          <li class="relative inline-block group py-1">
+            <a href="./error.html" class="focus-visible:outline-accent"
+              >Apparel</a
+            >
+            <span
+              class="absolute bottom-0 left-0 w-full h-0.5 bg-accent opacity-0 translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0"
+            ></span>
+          </li>
+          <li class="relative inline-block group py-1">
+            <a href="./error.html" class="focus-visible:outline-accent"
+              >Accessories</a
+            >
+            <span
+              class="absolute bottom-0 left-0 w-full h-0.5 bg-accent opacity-0 translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0"
+            ></span>
+          </li>
+          <li class="relative inline-block group py-1">
+            <a href="./error.html" class="focus-visible:outline-accent"
+              ><span class="text-accent">Sale</span></a
+            >
+            <span
+              class="absolute bottom-0 left-0 w-full h-0.5 bg-accent opacity-0 translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0"
+            ></span>
+          </li>
+        </ul>
+        <!-- Navigation bar with icons for Desktop -->
+        <div class="flex items-center gap-4 lg:gap-10">
+          <a
+            href="./error.html"
+            aria-label="Search"
+            class="hidden lg:inline-block w-8 h-8 p-1 text-text stroke-text transition-all duration-[0.3s] hover:scale-[1.2] hover:text-accent hover:stroke-accent focus-visible:outline-accent focus-visible:outline-offset-8 focus-visible:text-accent focus-visible:stroke-accent"
+          >
+            <svg
+              viewBox="0 0 25 25"
+              fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M10.7121 0.512695C15.8433 0.773018 19.924 5.01603 19.924 10.2119L19.9113 10.7119C19.7995 12.9165 18.9505 14.9255 17.6086 16.502L24.2736 23.1738C24.5765 23.477 24.5764 23.9692 24.2736 24.2725C23.9707 24.5757 23.4789 24.5757 23.176 24.2725L16.5119 17.6006C14.8158 19.0482 12.6166 19.9238 10.2121 19.9238L9.7121 19.9111C4.7464 19.6594 0.764803 15.6776 0.512878 10.7119L0.500183 10.2119C0.500183 4.84828 4.84846 0.5 10.2121 0.5L10.7121 0.512695ZM10.2121 2.05273C5.70575 2.05273 2.05292 5.70556 2.05292 10.2119C2.05302 14.7182 5.70581 18.3711 10.2121 18.3711C14.7183 18.371 18.3712 14.7181 18.3713 10.2119C18.3713 5.70563 14.7184 2.05284 10.2121 2.05273Z"
+              />
+            </svg>
+          </a>
+          <a
+            href="./error.html"
+            aria-label="Account"
+            class="hidden lg:inline-block w-8 h-8 p-1 text-text transition-all duration-[0.3s] hover:scale-[1.2] hover:text-accent focus-visible:outline-accent focus-visible:outline-offset-8 focus-visible:text-accent"
+          >
+            <svg
+              viewBox="0 0 25 25"
+              fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 0C18.6274 0 24 5.37258 24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12C0 5.37258 5.37258 0 12 0ZM9.89453 17C8.49271 17.1002 7.67577 17.7317 7.16211 18.4756C6.8126 18.9818 6.59392 19.5585 6.46582 20.0869C8.04075 21.1668 9.94614 21.7998 12 21.7998C14.0515 21.7998 15.9544 21.1674 17.5283 20.0898C16.595 17.6107 14.8686 17.0353 14.291 17H9.89453ZM12 2.2002C6.58761 2.2002 2.2002 6.58761 2.2002 12C2.2002 14.4952 3.13444 16.7709 4.66992 18.501C4.84307 18.073 5.06581 17.6395 5.35156 17.2256C6.21647 15.973 7.62874 14.9472 9.7666 14.8027L9.80371 14.8008H14.3691L14.3984 14.8018C15.7517 14.8733 17.9602 15.854 19.2686 18.5713C20.8411 16.8329 21.7998 14.5288 21.7998 12C21.7998 6.58761 17.4124 2.2002 12 2.2002ZM12 5.28027C14.0543 5.28041 15.7206 6.94571 15.7207 9L15.7158 9.19141C15.6162 11.1569 13.9902 12.7206 12 12.7207L11.8086 12.7158C9.84325 12.6161 8.2804 10.9901 8.28027 9C8.28042 6.94572 9.94572 5.28042 12 5.28027ZM12 7.48047C11.1607 7.48062 10.4806 8.16074 10.4805 9C10.4806 9.83927 11.1607 10.5204 12 10.5205C12.8393 10.5204 13.5204 9.83928 13.5205 9C13.5204 8.16073 12.8393 7.4806 12 7.48047Z"
+              />
+            </svg>
+          </a>
+          <a
+            href="./error.html"
+            aria-label="Cart"
+            class="relative w-8 h-8 p-1 text-text stroke-text inline-block transition-all duration-[0.3s] hover:scale-[1.2] hover:text-accent hover:stroke-accent focus-visible:outline-accent focus-visible:outline-offset-8 focus-visible:text-accent focus-visible:stroke-accent"
+          >
+            <svg
+              viewBox="0 0 25 25"
+              fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12.5986 0.519226C11.8469 0.469165 10.7448 0.62568 9.73926 1.25165C8.68607 1.9075 7.78887 3.04812 7.50488 4.84637L7.49414 4.90985V6.54364H3.24316C1.72833 6.54364 0.5 7.77197 0.5 9.2868V19.0241L0.506836 19.3063C0.649305 22.111 2.89847 24.3603 5.70312 24.5026L5.98535 24.5095H19.0146L19.2969 24.5026C22.1015 24.3603 24.3507 22.111 24.4932 19.3063L24.5 19.0241V9.2868C24.5 7.86651 23.4204 6.69857 22.0371 6.55829L21.7568 6.54364H17.6436V4.92645L17.6377 4.8786C17.5519 4.14935 17.1974 3.10552 16.4121 2.21649C15.6053 1.30304 14.366 0.581549 12.5986 0.51825V0.519226ZM21.7568 8.18915C22.3628 8.18915 22.8545 8.68087 22.8545 9.2868V19.0241C22.8541 21.1444 21.135 22.8638 19.0146 22.864H5.98535C3.86497 22.8638 2.14588 21.1444 2.14551 19.0241V9.2868C2.14551 8.68087 2.63723 8.18915 3.24316 8.18915H7.49414V11.8923C7.4944 12.3465 7.86313 12.7145 8.31738 12.7145C8.77153 12.7144 9.14036 12.3464 9.14062 11.8923V8.18915H15.9971V11.8913C15.9971 12.3457 16.3659 12.7145 16.8203 12.7145C17.2746 12.7144 17.6436 12.3456 17.6436 11.8913V8.18915H21.7568ZM12.5068 2.16083L12.5234 2.1618L12.5391 2.16278C13.8431 2.20943 14.6623 2.72168 15.1787 3.30634C15.7016 3.89849 15.9371 4.59466 15.9971 5.03387V6.54364H9.14062V5.04462C9.35925 3.75342 9.97275 3.04556 10.6094 2.64911C11.2885 2.22642 12.0479 2.12622 12.5068 2.16083Z"
+              />
+            </svg>
+            <div
+              x-show="total > 0"
+              x-cloak
+              class="h-5 w-5 rounded-full bg-primary text-white font-medium text-xs flex items-center justify-center absolute top-0 right-0 -translate-y-1/2 translate-x-1/2"
+            >
+              <span x-text="total"></span>
+            </div>
+          </a>
+        </div>
+      </nav>
+      <!-- Burger menu for Mobile -->
+      <div
+        x-show="mobileMenuOpen"
+        x-collapse
+        x-cloak
+        @click.away="mobileMenuOpen = false"
+        class="lg:hidden border-t border-border bg-white px-6 py-4 shadow-lg"
+      >
+        <!-- Navigation bar for Mobile -->
+        <ul class="flex flex-col gap-4 text-text font-medium text-base">
+          <li>
+            <a href="./error.html" class="block py-1 hover:text-accent"
+              >Backpack</a
+            >
+          </li>
+          <li>
+            <a href="./error.html" class="block py-1 hover:text-accent"
+              >Tents</a
+            >
+          </li>
+          <li>
+            <a href="./error.html" class="block py-1 hover:text-accent"
+              >Apparel</a
+            >
+          </li>
+          <li>
+            <a href="./error.html" class="block py-1 hover:text-accent"
+              >Accessories</a
+            >
+          </li>
+          <li>
+            <a href="./error.html" class="block py-1 text-accent font-semibold"
+              >Sale</a
+            >
+          </li>
+        </ul>
+        <div class="mt-6 pt-4 border-t border-border flex items-center gap-6">
+          <a
+            href="./error.html"
+            class="flex items-center gap-2 text-sm text-secondary hover:text-text"
+          >
+            <span>Search</span>
+          </a>
+          <a
+            href="./error.html"
+            class="flex items-center gap-2 text-sm text-secondary hover:text-text"
+          >
+            <span>Account</span>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- Main -->
+    <main
+      class="max-w-7xl mx-auto w-full py-4 px-4 lg:px-8 flex flex-col gap-4"
+    >
+      <p class="text-secondary">
+        Home/Backpacks/
+        <span class="text-text font-medium">Trail 28L Hiking Backpack</span>
+      </p>
+      <div class="grid lg:grid-cols-2 gap-8">
+        <!-- Product gallery -->
+        <div class="flex flex-col gap-4 relative">
+          <div class="bg-white py-0.5 px-2 rounded-xl absolute top-4 left-4">
+            New
+          </div>
+          <!-- Main image card -->
+          <div
+            class="bg-background rounded-xl aspect-square flex items-center justify-center overflow-hidden"
+          >
+            <img
+              alt="Image of backpack"
+              :src="activeImage"
+              class="w-full h-full object-contain"
+            />
+          </div>
+          <!-- Mini gallery -->
+          <div class="grid grid-cols-4 gap-4">
+            <template
+              x-for="(imgSrc, index) in (imagesByColor[color] || imagesByColor['Forest green'])"
+              :key="imgSrc"
+            >
+              <button
+                type="button"
+                @click="activeImage = imgSrc"
+                :class="activeImage === imgSrc ? 'border-black' : 'border-transparent hover:border-accent'"
+                class="bg-background rounded-xl aspect-square flex items-center justify-center border-2 overflow-hidden transition-colors duration-300 focus-visible:outline-accent focus-visible:outline-offset-2"
+                :aria-label="'View backpack image ' + (index + 1)"
+              >
+                <img
+                  :src="imgSrc"
+                  alt="Backpack thumbnail"
+                  class="w-full h-full object-contain"
+                />
+              </button>
+            </template>
+          </div>
+        </div>
+        <!-- Product information -->
+        <div class="flex flex-col">
+          <div class="border-b border-border pb-8 flex flex-col gap-4">
+            <!-- Product code -->
+            <p class="text-secondary">SKU: TK-TR28-GRN</p>
+            <!-- Product name -->
+            <h1
+              class="text-text text-2xl lg:text-3xl font-bold"
+              aria-label="Trail 28L Hiking Backpack"
+            >
+              Trail 28L Hiking Backpack
+            </h1>
+            <!-- Product rating -->
+            <div class="flex items-center gap-3">
+              <div class="text-star flex gap-1">
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M12.0215 0.0976562L15.8096 7.83691L23.9023 9.14551L24 9.16113L23.9326 9.23242L18.2227 15.2832L19.4697 23.8984L19.4844 24L19.3936 23.9521L12.0264 20.082L4.76367 23.9521L4.67383 24L4.6875 23.8984L5.88086 15.2842L0.0693359 9.28809L0 9.2168L0.0976562 9.2002L8.24316 7.83691L11.9268 0.0976562L11.9736 0L12.0215 0.0976562Z"
+                  />
+                </svg>
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M12.0215 0.0976562L15.8096 7.83691L23.9023 9.14551L24 9.16113L23.9326 9.23242L18.2227 15.2832L19.4697 23.8984L19.4844 24L19.3936 23.9521L12.0264 20.082L4.76367 23.9521L4.67383 24L4.6875 23.8984L5.88086 15.2842L0.0693359 9.28809L0 9.2168L0.0976562 9.2002L8.24316 7.83691L11.9268 0.0976562L11.9736 0L12.0215 0.0976562Z"
+                  />
+                </svg>
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M12.0215 0.0976562L15.8096 7.83691L23.9023 9.14551L24 9.16113L23.9326 9.23242L18.2227 15.2832L19.4697 23.8984L19.4844 24L19.3936 23.9521L12.0264 20.082L4.76367 23.9521L4.67383 24L4.6875 23.8984L5.88086 15.2842L0.0693359 9.28809L0 9.2168L0.0976562 9.2002L8.24316 7.83691L11.9268 0.0976562L11.9736 0L12.0215 0.0976562Z"
+                  />
+                </svg>
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M12.0215 0.0976562L15.8096 7.83691L23.9023 9.14551L24 9.16113L23.9326 9.23242L18.2227 15.2832L19.4697 23.8984L19.4844 24L19.3936 23.9521L12.0264 20.082L4.76367 23.9521L4.67383 24L4.6875 23.8984L5.88086 15.2842L0.0693359 9.28809L0 9.2168L0.0976562 9.2002L8.24316 7.83691L11.9268 0.0976562L11.9736 0L12.0215 0.0976562Z"
+                  />
+                </svg>
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M12.0215 0.0976562L15.8096 7.83691L23.9023 9.14551L24 9.16113L23.9326 9.23242L18.2227 15.2832L19.4697 23.8984L19.4844 24L19.3936 23.9521L12.0264 20.082L4.76367 23.9521L4.67383 24L4.6875 23.8984L5.88086 15.2842L0.0693359 9.28809L0 9.2168L0.0976562 9.2002L8.24316 7.83691L11.9268 0.0976562L11.9736 0L12.0215 0.0976562Z"
+                  />
+                </svg>
+              </div>
+              <p
+                class="text-secondary"
+                aria-label="Rating: 4.6 out of 5 stars and 128 reviews"
+              >
+                4.6 &middot; 128 reviews
+              </p>
+            </div>
+            <!-- Product price -->
+            <div class="flex items-end gap-2">
+              <h2 class="text-2xl font-bold" aria-label="New price: $89.00">
+                $89.00
+              </h2>
+              <p
+                class="text-secondary line-through"
+                aria-label="Old price: $119.00"
+              >
+                $119.00
+              </p>
+              <div
+                class="text-accent text-sm font-bold bg-[#FCE8DF] py-0.5 px-2 rounded-md"
+                aria-label="Discount -25%"
+              >
+                &minus;25%
+              </div>
+            </div>
+            <!-- Product color -->
+            <div class="flex flex-col gap-1">
+              <p class="text-secondary">
+                Color:
+                <span
+                  class="text-text font-bold"
+                  x-text="color ? color : 'None'"
+                ></span>
+              </p>
+              <div class="flex gap-5 p-1.5">
+                <button
+                  type="button"
+                  @click="setColor('Forest green')"
+                  :class="color === 'Forest green' ? 'ring-black' : 'ring-border'"
+                  class="bg-forest rounded-full h-8 w-8 ring-2 ring-offset-4 flex justify-center items-center hover:ring-4 hover:ring-offset-0 hover:ring-forest transition-all duration-300 ease-in-out focus-visible:ring-accent"
+                  aria-label="Select color: Forest Green"
+                ></button>
+                <button
+                  type="button"
+                  @click="setColor('Navy')"
+                  :class="color === 'Navy' ? 'ring-black' : 'ring-border'"
+                  class="bg-navy rounded-full h-8 w-8 ring-2 ring-offset-4 flex justify-center items-center hover:ring-4 hover:ring-offset-0 hover:ring-navy transition-all duration-300 ease-in-out focus-visible:ring-accent"
+                  aria-label="Select color: Navy"
+                ></button>
+                <button
+                  type="button"
+                  @click="setColor('Sand')"
+                  :class="color === 'Sand' ? 'ring-black' : 'ring-border'"
+                  class="bg-sand rounded-full h-8 w-8 ring-2 ring-offset-4 flex justify-center items-center hover:ring-4 hover:ring-offset-0 hover:ring-sand transition-all duration-300 ease-in-out focus-visible:ring-accent"
+                  aria-label="Select color: Sand"
+                ></button>
+                <button
+                  type="button"
+                  @click="setColor('Black')"
+                  :class="color === 'Black' ? 'ring-black' : 'ring-border'"
+                  class="bg-black rounded-full h-8 w-8 ring-2 ring-offset-4 flex justify-center items-center hover:ring-4 hover:ring-offset-0 hover:ring-black transition-all duration-300 ease-in-out focus-visible:ring-accent"
+                  aria-label="Select color: Black"
+                ></button>
+              </div>
+            </div>
+            <!-- Product size -->
+            <div class="flex flex-col gap-1">
+              <p class="text-secondary">
+                Size:
+                <span
+                  class="text-text font-bold"
+                  x-text="size ? size : 'None'"
+                ></span>
+                &middot;
+                <a
+                  href="./error.html"
+                  class="underline focus-visible:outline-accent focus-visible:outline-offset-4 hover:text-black transition-colors duration-300 ease-in-out"
+                  aria-label="Size guide"
+                  >Size guide</a
+                >
+              </p>
+              <div class="flex gap-2">
+                <button
+                  type="button"
+                  @click="size = 'S/M'"
+                  :class="size === 'S/M' ? 'bg-black text-white border-black' : 'border-border hover:border-black text-text'"
+                  class="flex justify-center py-2 px-5 border rounded-lg transition-colors duration-300 focus-visible:outline-accent"
+                  aria-label="Select size: S/M"
+                >
+                  S/M
+                </button>
+                <button
+                  type="button"
+                  @click="size = 'M/L'"
+                  :class="size === 'M/L' ? 'bg-black text-white border-black' : 'border-border hover:border-black text-text'"
+                  class="flex justify-center py-2 px-5 border rounded-lg transition-colors duration-300 focus-visible:outline-accent"
+                  aria-label="Select size: M/L"
+                >
+                  M/L
+                </button>
+                <button
+                  type="button"
+                  disabled
+                  class="flex justify-center py-2 px-5 border rounded-lg focus-visible:outline-accent disabled:opacity-30 disabled:cursor-not-allowed disabled:line-through"
+                  aria-label="Size XL is out of stock"
+                >
+                  XL
+                </button>
+              </div>
+            </div>
+            <div
+              class="flex flex-wrap lg:flex-nowrap items-center gap-2 w-full"
+            >
+            <!-- Product count -->
+              <div
+                class="flex order-1 items-center justify-between w-28 h-12 px-3 border border-border rounded-lg"
+              >
+                <button
+                  type="button"
+                  @click="if (count > min) count--"
+                  :disabled="count <= min"
+                  class="text-secondary hover:text-text hover:font-medium px-1 focus-visible:outline-accent transition-colors disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:text-secondary disabled:hover:font-normal"
+                  aria-label="Decrease quantity"
+                >
+                  &minus;
+                </button>
+                <span
+                  x-text="count"
+                  class="font-medium text-text select-none"
+                ></span>
+                <button
+                  type="button"
+                  @click="if (count < max) count++"
+                  :disabled="count >= max"
+                  class="text-secondary hover:text-text hover:font-medium px-1 focus-visible:outline-accent transition-colors disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:text-secondary disabled:hover:font-normal"
+                  aria-label="Increase quantity"
+                >
+                  &plus;
+                </button>
+              </div>
+              <!-- Product button Add to card -->
+              <button
+                type="button"
+                @click="addToCart()"
+                class="w-full lg:flex-1 lg:w-auto order-3 lg:order-2 h-12 bg-primary text-white font-medium rounded-lg hover:bg-green-700 hover:text-lg transition-all duration-300 ease-in-out focus-visible:outline-primary focus-visible:outline-offset-4"
+                aria-label="Add to cart"
+              >
+                Add to cart
+              </button>
+              <!-- Add to card information notification -->
+              <div
+                x-show="notification"
+                x-cloak
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 translate-y-2 scale-95"
+                x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                x-transition:leave="transition ease-in duration-200"
+                x-transition:leave-start="opacity-100 scale-100"
+                x-transition:leave-end="opacity-0 translate-y-2 scale-95"
+                class="fixed top-20 right-8 z-50 flex items-center gap-3 bg-black text-white px-4 py-3 rounded-2xl shadow-xl text-sm border border-white/5"
+                role="status"
+                aria-live="polite"
+              >
+                <span
+                  class="w-6 h-6 rounded-full bg-primary flex items-center justify-center shrink-0"
+                >
+                  <svg
+                    class="w-3.5 h-3.5 text-white"
+                    viewBox="0 0 12 12"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <polyline points="2.5 6 5 8.5 9.5 3.5"></polyline>
+                  </svg>
+                </span>
+                <p>
+                  Trail 28L &middot; <span x-text="color"></span> &middot;
+                  <span x-text="size"></span> &times;<span
+                    x-text="count"
+                  ></span>
+                  added to cart
+                </p>
+                <a
+                  href="./error.html"
+                  class="text-green-400 font-medium hover:underline ml-1 shrink-0"
+                >
+                  View cart
+                </a>
+              </div>
+              <!-- Add to card alert notification -->
+              <div
+                x-show="alertMsg"
+                x-cloak
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 translate-y-2 scale-95"
+                x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                x-transition:leave="transition ease-in duration-200"
+                x-transition:leave-start="opacity-100 scale-100"
+                x-transition:leave-end="opacity-0 translate-y-2 scale-95"
+                class="fixed top-20 right-8 z-50 flex items-center gap-3 bg-black text-white px-4 py-3 rounded-2xl shadow-xl text-sm border border-white/5"
+                role="status"
+                aria-live="alert"
+              >
+                <span
+                  class="w-6 h-6 rounded-full bg-[#FCE8DF] border-2 border-accent text-accent flex items-center justify-center shrink-0"
+                >
+                  <svg
+                    width="5"
+                    height="16"
+                    viewBox="0 0 10 36"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M5 30C6.65685 30 8 31.3431 8 33C8 34.6569 6.65685 36 5 36C3.34315 36 2 34.6569 2 33C2 31.3431 3.34315 30 5 30ZM7 28H3.5L0 0H10L7 28Z"
+                    />
+                  </svg>
+                </span>
+                <p>Please select the size and color!</p>
+              </div>
+              <!-- Product button Add to wishlist -->
+              <button
+                type="button"
+                x-data="{inWishlist: false}"
+                @click="inWishlist = !inWishlist"
+                :class="inWishlist ? 'text-red-500 stroke-red-500' : 'text-transparent stroke-black'"
+                class="flex order-2 lg:order-3 items-center justify-center w-12 h-12 border border-border rounded-lg hover:bg-pink-200 hover:border-red-500 hover:stroke-red-500 transition-all duration-300 ease-in-out focus-visible:stroke-red-500 focus-visible:outline-red-500"
+                aria-label="Add to wishlist"
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 26 26"
+                  fill="currentColor"
+                  stroke-width="1.80347"
+                  stroke-linejoin="round"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12.6909 5.86243C12.7442 5.97464 12.9121 5.97366 12.9638 5.86069C13.9567 3.68993 17.2742 0.516227 20.0297 0.940501C21.443 1.03941 24.9019 2.64672 24.9019 7.76544C24.4747 11.5139 21.5872 20.1664 12.9056 24.8637C12.8621 24.8873 12.8108 24.8874 12.7688 24.8612C9.25371 22.6702 2.0734 16.2581 0.949792 7.76544C0.596453 5.09479 2.17039 0.643765 6.53886 0.940501C7.73374 1.02167 10.4554 1.15422 12.6909 5.86243Z"
+                  />
+                </svg>
+              </button>
+            </div>
+            <!-- Product in stock infirmation -->
+            <div class="flex items-center gap-2 text-primary">
+              <div class="h-2 w-2 bg-green-500 rounded-full"></div>
+              <p aria-label="In stock - ships in 1-2 days">
+                In stock - ships in 1-2 days
+              </p>
+            </div>
+          </div>
+          <!-- Product accordion -->
+          <div class="flex flex-col border-t border-border">
+            <!-- Description -->
+            <div class="pb-2 border-b border-border">
+              <button
+                type="button"
+                @click="selected = (selected === 1 ? null : 1)"
+                class="py-4 w-full flex justify-between items-center font-medium focus-visible:outline-accent"
+              >
+                <span>Description</span>
+                <span x-text="selected === 1 ? '&minus;' : '&plus;'"></span>
+              </button>
+              <div
+                x-show="selected === 1"
+                x-collapse
+                x-cloak
+                class="text-secondary transition-transform duration-300"
+              >
+                <p>
+                  A lightweight 28-litre day pack with a padded laptop sleeve,
+                  breathable back panel and water-resistant fabric. Fits a 15"
+                  laptop and a 2 L hydration bladder.
+                </p>
+              </div>
+            </div>
+            <!-- Specifications -->
+            <div class="pb-2 border-b border-border">
+              <button
+                type="button"
+                @click="selected = (selected === 2 ? null : 2)"
+                class="py-4 w-full flex justify-between items-center font-medium focus-visible:outline-accent"
+              >
+                <span>Specifications</span>
+                <span x-text="selected === 2 ? '&minus;' : '&plus;'"></span>
+              </button>
+              <div
+                x-show="selected === 2"
+                x-collapse
+                x-cloak
+                class="text-secondary"
+              >
+                <p>
+                  Vinylon F is a durable fabric used primarily in Fjallraven
+                  Kanken backpacks. It is made by combining polyvinyl alcohol
+                  fibers, which preserves the properties of natural materials
+                  and eliminates the need for additional protective coatings.
+                  The fibers of Vinylon F swell when exposed to moisture, which
+                  makes backpacks made from this material partially waterproof.
+                  The fabric can also be cleaned with warm water, a sponge, and
+                  mild soap. It has been used in Kanken backpacks since the late
+                  1970s.
+                </p>
+              </div>
+            </div>
+            <!-- Delivery & returns -->
+            <div class="pb-2 border-b border-border">
+              <button
+                type="button"
+                @click="selected = (selected === 3 ? null : 3)"
+                class="py-4 w-full flex justify-between items-center font-medium focus-visible:outline-accent"
+              >
+                <span>Delivery & returns</span>
+                <span x-text="selected === 3 ? '&minus;' : '&plus;'"></span>
+              </button>
+              <div
+                x-show="selected === 3"
+                x-collapse
+                x-cloak
+                class="text-secondary"
+              >
+                <p>
+                  Orders placed before 8:00 PM are shipped the same day.
+                  Delivery within 3-5 business days.
+                </p>
+                <p>Free delivery from 2999 UAH</p>
+                <p>Free returns</p>
+                <p>Safe and fast payment methods</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
